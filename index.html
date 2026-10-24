@@ -1,71 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101828">
-<meta name="description" content="Assistant en français pour répondre à vos questions et créer des images.">
-<title>Mohamed GPT</title>
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17152d"><title>Mohamed GPT</title>
+<link rel="icon" href="logo-mohamed-gpt.jpg">
 <style>
-:root{color-scheme:light;--ink:#172033;--muted:#667085;--line:#e5e7eb;--accent:#5b5bd6;--bg:#f6f7fb}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}
-header{background:#101828;color:#fff;padding:18px max(18px,calc((100% - 760px)/2));display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:2;box-shadow:0 3px 16px #10182820}
-.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#818cf8,#5b5bd6);display:grid;place-items:center;font-weight:900;font-size:22px}
-.brand{font-weight:800;font-size:18px}.sub{font-size:12px;color:#cbd5e1;margin-top:3px}
-main{max-width:760px;margin:0 auto;padding:24px 16px 150px}
-.welcome{background:white;border:1px solid var(--line);border-radius:24px;padding:25px;margin:8px 0 18px;box-shadow:0 8px 30px #10182808}
-.welcome h1{font-size:clamp(25px,5vw,34px);margin:0 0 10px;letter-spacing:-.7px}.welcome p{margin:0;color:var(--muted);line-height:1.6}
-.suggestions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.suggestion{border:1px solid #d9dcf5;background:#f7f7ff;color:#3d3d9d;border-radius:999px;padding:10px 13px;font-size:13px;cursor:pointer}
-#messages{display:flex;flex-direction:column;gap:12px}.card{background:white;border:1px solid var(--line);border-radius:18px;padding:16px;line-height:1.65;overflow-wrap:anywhere;box-shadow:0 4px 18px #10182808}.user{background:#eeefff;border-color:#dadaff;align-self:flex-end;max-width:92%;white-space:pre-wrap}.assistant{align-self:stretch}.label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--accent);margin-bottom:7px}.card h3{margin:4px 0 8px}.card p{margin:8px 0}.card a{color:#4f46e5}.card img{width:100%;display:block;border-radius:14px;margin-top:12px}.notice{color:var(--muted);font-size:12px;margin-top:12px}
-.composer-wrap{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(transparent,#f6f7fb 20%);padding:18px 14px calc(14px + env(safe-area-inset-bottom));z-index:3}.composer{max-width:760px;margin:0 auto;background:white;border:1px solid #d9dce5;border-radius:22px;padding:8px;display:flex;gap:8px;box-shadow:0 8px 35px #10182818}.composer textarea{resize:none;min-height:44px;max-height:140px;flex:1;border:0;outline:0;padding:12px 10px;font:inherit;font-size:16px;background:transparent}.send{border:0;border-radius:16px;background:#5b5bd6;color:white;font-weight:800;padding:0 17px;cursor:pointer}.send:disabled{opacity:.5}.bottom-note{text-align:center;font-size:11px;color:#8a91a1;margin:8px auto 0;max-width:760px}
-@media(min-width:700px){main{padding-top:32px}.welcome{padding:32px}}
-</style>
-</head>
-<body>
-<header><div class="logo">M</div><div><div class="brand">Mohamed GPT</div><div class="sub">Assistant en français</div></div></header>
-<main>
-<section class="welcome" id="welcome">
-<h1>Que puis-je faire pour vous&nbsp;?</h1>
-<p>Posez-moi une question, demandez une explication ou décrivez une image que vous souhaitez créer.</p>
-<div class="suggestions">
-<button class="suggestion" data-prompt="Explique-moi les bases de la cybersécurité.">Apprendre la cybersécurité</button>
-<button class="suggestion" data-prompt="Explique-moi ce sujet simplement avec un exemple : ">Comprendre un sujet</button>
-<button class="suggestion" data-prompt="Génère une image de ">Créer une image</button>
-</div>
-</section>
-<div id="messages" aria-live="polite"></div>
-</main>
-<div class="composer-wrap"><form class="composer" id="form"><textarea id="q" rows="1" placeholder="Écrivez votre message…" aria-label="Votre message"></textarea><button class="send" id="send" type="submit">Envoyer</button></form><div class="bottom-note">Les réponses de recherche proviennent de Wikipédia. Une connexion Internet est nécessaire.</div></div>
+:root{color-scheme:dark;--bg:#10101b;--panel:#19192a;--panel2:#22223a;--accent:#8b7cff;--text:#f4f3ff;--muted:#b7b5d0}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#29234b 0,#10101b 48%);color:var(--text);font:16px/1.5 system-ui,sans-serif;min-height:100vh}
+.app{max-width:900px;margin:auto;min-height:100vh;display:flex;flex-direction:column;padding:14px}
+header{display:flex;align-items:center;gap:12px;padding:10px 4px 16px;border-bottom:1px solid #ffffff1a}
+.logo{width:52px;height:52px;border-radius:14px;object-fit:cover;background:white}
+h1{font-size:20px;margin:0}header p{margin:2px 0 0;color:var(--muted);font-size:13px}
+#status{margin-left:auto;font-size:11px;color:#d5d0ff;background:#ffffff12;padding:7px 9px;border-radius:99px}
+#chat{flex:1;padding:18px 0;display:flex;flex-direction:column;gap:14px}
+.welcome{padding:20px;border:1px solid #ffffff17;border-radius:22px;background:#ffffff08}
+.welcome h2{margin:0 0 8px;font-size:22px}.welcome p{margin:0;color:var(--muted)}
+.suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.suggestions button{background:#ffffff0c;border:1px solid #ffffff20;color:var(--text);border-radius:99px;padding:9px 12px}
+.msg{max-width:88%;padding:13px 15px;border-radius:18px;white-space:pre-wrap;overflow-wrap:anywhere}
+.user{align-self:flex-end;background:#6554cf;border-bottom-right-radius:5px}
+.assistant{align-self:flex-start;background:var(--panel2);border:1px solid #ffffff10;border-bottom-left-radius:5px}
+.label{font-size:11px;opacity:.75;margin-bottom:5px;font-weight:700;letter-spacing:.04em}
+.composer{position:sticky;bottom:0;padding:12px 0 5px;background:linear-gradient(transparent,var(--bg) 20%)}
+form{display:flex;gap:9px;background:var(--panel);border:1px solid #ffffff20;padding:8px;border-radius:20px}
+textarea{flex:1;resize:none;min-height:46px;max-height:140px;border:0;outline:0;background:transparent;color:var(--text);padding:11px;font:inherit}
+#send{border:0;border-radius:15px;background:var(--accent);color:#100e25;font-weight:800;padding:0 16px;min-width:78px}
+#send:disabled{opacity:.5}.foot{font-size:11px;color:var(--muted);text-align:center;padding:8px 5px}.error{color:#ffb9c2}.typing{opacity:.7;font-style:italic}
+@media(max-width:520px){.app{padding:10px}.msg{max-width:95%}.welcome{padding:17px}}
+</style></head>
+<body><div class="app">
+<header><img class="logo" src="logo-mohamed-gpt.jpg" alt="Logo Mohamed GPT"><div><h1>Mohamed GPT</h1><p>Ton assistant IA • Français</p></div><div id="status">À configurer</div></header>
+<main id="chat" aria-live="polite"><section class="welcome" id="welcome"><h2>Bienvenue sur Mohamed GPT 👋</h2><p>Pose une question, demande une explication ou apprends quelque chose étape par étape. Pour activer les réponses IA, le serveur doit être configuré.</p><div class="suggestions"><button type="button">Explique-moi les bases de la cybersécurité</button><button type="button">Aide-moi à comprendre les matrices</button><button type="button">Comment fonctionne un programme informatique ?</button></div></section></main>
+<div class="composer"><form id="form"><textarea id="prompt" rows="1" placeholder="Écris ta question…" aria-label="Ta question" required></textarea><button id="send" type="submit">Envoyer</button></form><div class="foot">Ne partage pas de mots de passe ni de données personnelles sensibles. Vérifie les informations importantes.</div></div></div>
 <script>
-const messages=document.getElementById('messages'), q=document.getElementById('q'), send=document.getElementById('send');
-function addCard(label, content, cls='assistant'){const card=document.createElement('article');card.className='card '+cls;if(label){const l=document.createElement('div');l.className='label';l.textContent=label;card.appendChild(l)}card.appendChild(content);messages.appendChild(card);card.scrollIntoView({behavior:'smooth',block:'nearest'});return card}
-function addText(label,text,cls='assistant'){const p=document.createElement('p');p.textContent=text;return addCard(label,p,cls)}
-function make(tag,text){const el=document.createElement(tag);el.textContent=text;return el}
-document.querySelectorAll('.suggestion').forEach(b=>b.addEventListener('click',()=>{q.value=b.dataset.prompt;q.focus();q.dispatchEvent(new Event('input'))}));
-q.addEventListener('input',()=>{q.style.height='auto';q.style.height=Math.min(q.scrollHeight,140)+'px'});
-q.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();document.getElementById('form').requestSubmit()}});
-document.getElementById('form').addEventListener('submit',async e=>{e.preventDefault();const query=q.value.trim();if(!query)return;q.value='';q.style.height='auto';addText('Vous',query,'user');send.disabled=true;
-try{
- const lower=query.toLocaleLowerCase('fr');
- if(/\b(génère|genere|crée une image|cree une image|dessine|image de)\b/.test(lower)){
-   const prompt=query.replace(/génère|genere|crée|cree|une image|image de|dessine/gi,'').trim()||query;
-   const wrap=document.createElement('div');wrap.appendChild(make('p','Voici une image correspondant à votre demande :'));
-   const img=document.createElement('img');img.alt=prompt;img.loading='lazy';img.src='https://image.pollinations.ai/prompt/'+encodeURIComponent(prompt+', high quality, detailed')+'?nologo=true';img.onerror=()=>{wrap.appendChild(make('p','La génération d’image n’a pas abouti. Réessayez avec une autre description.'))};wrap.appendChild(img);addCard('Création d’image',wrap);return;
- }
- const wait=addText('Recherche','Je recherche une source pertinente…');
- const url='https://fr.wikipedia.org/w/api.php?action=query&list=search&srsearch='+encodeURIComponent(query)+'&format=json&origin=*&utf8=1';
- const response=await fetch(url);if(!response.ok)throw new Error('network');const data=await response.json();const top=data?.query?.search?.[0];wait.remove();
- if(!top){addText('Résultat','Je n’ai pas trouvé de résultat pertinent dans Wikipédia. Essayez de reformuler votre question.');return}
- const sumResponse=await fetch('https://fr.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(top.title));if(!sumResponse.ok)throw new Error('summary');const sum=await sumResponse.json();
- const box=document.createElement('div');box.appendChild(make('h3',sum.title||top.title));box.appendChild(make('p',sum.extract||'Aucun résumé disponible pour cette page.'));
- if(sum.thumbnail?.source){const img=document.createElement('img');img.src=sum.thumbnail.source;img.alt=sum.title||'';box.appendChild(img)}
- if(sum.content_urls?.desktop?.page){const a=document.createElement('a');a.href=sum.content_urls.desktop.page;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Lire la source sur Wikipédia';box.appendChild(a)}
- const note=make('div','Cette réponse résume une page de Wikipédia et ne remplace pas une vérification approfondie.');note.className='notice';box.appendChild(note);addCard('Source documentaire',box);
-}catch(err){const box=document.createElement('div');box.appendChild(make('p','Impossible de récupérer une réponse pour le moment. Vérifiez votre connexion Internet puis réessayez.'));addCard('Connexion nécessaire',box)}
-finally{send.disabled=false;q.focus()}
-});
-if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
-</script>
-</body></html>
+const API_URL="https://REMPLACE-MOI.workers.dev/chat"; // À remplacer après le déploiement du serveur.
+const chat=document.getElementById("chat"),form=document.getElementById("form"),promptBox=document.getElementById("prompt"),send=document.getElementById("send"),status=document.getElementById("status");
+let history=[],welcome=document.getElementById("welcome");
+document.querySelectorAll(".suggestions button").forEach(b=>b.addEventListener("click",()=>{promptBox.value=b.textContent;promptBox.focus()}));
+promptBox.addEventListener("input",()=>{promptBox.style.height="auto";promptBox.style.height=Math.min(promptBox.scrollHeight,140)+"px"});
+function addMessage(role,text,extra=""){if(welcome){welcome.remove();welcome=null}const box=document.createElement("div");box.className="msg "+(role==="user"?"user":"assistant")+" "+extra;const label=document.createElement("div");label.className="label";label.textContent=role==="user"?"TOI":"MOHAMED GPT";const body=document.createElement("div");body.textContent=text;box.append(label,body);chat.appendChild(box);box.scrollIntoView({behavior:"smooth",block:"end"});return{box,body}}
+form.addEventListener("submit",async e=>{e.preventDefault();const text=promptBox.value.trim();if(!text||send.disabled)return;addMessage("user",text);history.push({role:"user",content:text});promptBox.value="";promptBox.style.height="auto";send.disabled=true;send.textContent="…";const pending=addMessage("assistant","Je réfléchis…","typing");
+try{if(API_URL.includes("REMPLACE-MOI"))throw new Error("L'IA n'est pas connectée. Déploie le serveur et remplace API_URL dans index.html.");const response=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history.slice(-16)})});let data={};try{data=await response.json()}catch(_){}if(!response.ok)throw new Error(data.error||"Erreur du serveur ("+response.status+").");if(!data.reply)throw new Error("Réponse vide. Vérifie la clé API et le quota.");pending.box.classList.remove("typing");pending.body.textContent=data.reply;history.push({role:"assistant",content:data.reply});status.textContent="Connecté"}catch(err){pending.box.classList.add("error");pending.body.textContent="Je n'ai pas pu répondre : "+err.message}finally{send.disabled=false;send.textContent="Envoyer";promptBox.focus()}});
+status.textContent=API_URL.includes("REMPLACE-MOI")?"Serveur à configurer":"Serveur configuré";
+</script></body></html>
